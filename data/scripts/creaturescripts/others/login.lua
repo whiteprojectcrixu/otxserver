@@ -63,9 +63,6 @@ function playerLogin.onLogin(player)
 	if isPremium(player) then
 		player:setStorageValue(Storage.PremiumAccount, 1)
 	end
-
--- Teleport Main Temple to free accounts
---[[
 	-- Premium Ends Teleport to Temple, change addon (citizen) houseless
 	local defaultTown = "Thais" -- default town where player is teleported if his home town is in premium area
 	local freeTowns = {"Ab'Dendriel", "Carlin", "Kazordoon", "Thais", "Venore", "Rookgaard", "Dawnport", "Dawnport Tutorial", "Island of Destiny"} -- towns in free account area
@@ -91,7 +88,6 @@ function playerLogin.onLogin(player)
         end
 	end
 	-- End 'Premium Ends Teleport to Temple'
-]]
 
 	-- Recruiter system
 	local resultId = db.storeQuery('SELECT `recruiter` from `accounts` where `id`='..getAccountNumberByPlayerName(getPlayerName(player)))
@@ -142,13 +138,9 @@ function playerLogin.onLogin(player)
 
 	player:loadSpecialStorage()
 
--- GhostMode GM+
---[[
 	if player:getGroup():getId() >= GROUP_TYPE_GAMEMASTER then
 		player:setGhostMode(true)
 	end
-]]
-
 	-- Boosted creature
 	player:sendTextMessage(MESSAGE_BOOSTED_CREATURE, "Today's boosted creature: " .. Game.getBoostedCreature() .. " \
 	Boosted creatures yield more experience points, carry more loot than usual and respawn at a faster rate.")
@@ -171,8 +163,6 @@ function playerLogin.onLogin(player)
 		[CONST_PREY_SLOT_THIRD] = 1
 	}
 
--- Tutor MSG
---[[
 	if (player:getAccountType() == ACCOUNT_TYPE_TUTOR) then
 	local msg = [[:: Tutor Rules
 		1 *> 3 Warnings you lose the job.
@@ -194,7 +184,6 @@ function playerLogin.onLogin(player)
 		- Commands -]]
 		player:popupFYI(msg)
 	end
-]]
 
 	-- Open channels
 	if table.contains({TOWNS_LIST.DAWNPORT, TOWNS_LIST.DAWNPORT_TUTORIAL}, player:getTown():getId())then
